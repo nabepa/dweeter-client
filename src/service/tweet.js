@@ -17,7 +17,7 @@ export default class TweetService {
     return this.http.fetch(`/tweets`, {
       method: 'POST',
       headers: this.getHeaders(),
-      body: JSON.stringify({ text, name: 'Nabepa', username: 'boil12' }),
+      body: JSON.stringify({ text, username: 'ellie', name: 'Ellie' }),
     });
   }
 

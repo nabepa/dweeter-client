@@ -5,18 +5,16 @@ export default class HttpClient {
   }
 
   async fetch(url, options) {
-    // this.fetch(이 클래스의 메소드)와 fetch(js 내장 함수)는 다른 것
     const res = await fetch(`${this.baseURL}${url}`, {
       ...options,
-      headers: {
-        'Content-Type': 'application/json',
-        ...options.headers,
-      },
+      headers: { 'Content-Type': 'application/json', ...options.headers },
     });
     let data;
+    // body가 없는 경우 json 호출시 에러 발생 가능하므로 try...catch
     try {
       data = await res.json();
     } catch (error) {
+      // 단 이 경우 body가 없는 것 뿐이지 진짜 에러가 아니므로 출력만 하고 넘어가기
       console.error(error);
     }
 

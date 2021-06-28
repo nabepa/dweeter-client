@@ -3,7 +3,7 @@ import socket from 'socket.io-client';
 export default class Socket {
   constructor(baseURL, getAccessToken) {
     this.io = socket(baseURL, {
-      // auth가 아닌 query로 token을 전달하면 기록 남아서 보안에 취약
+      // token을 query를 통해 전달하면 브라우저상에서 token이 보이고, log에도 남아서 보안 상 위험
       auth: (cb) => cb({ token: getAccessToken() }),
     });
 
@@ -18,6 +18,6 @@ export default class Socket {
     }
 
     this.io.on(event, (message) => callback(message));
-    return () => this.io.off(event); // 사용자가 연결 끊고 싶을때 사용할 수 있는 콜백
+    return () => this.io.off(event); // 끄고 싶을 때 사용
   }
 }
